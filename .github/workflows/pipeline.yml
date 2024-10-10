@@ -11,7 +11,7 @@ jobs:
   build-and-scan:
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: sibhanayak/pythonapp
+      DOCKER_IMAGE: sreeni830/pythonapp
       SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
