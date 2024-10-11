@@ -17,7 +17,7 @@ jobs:
       KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION}}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -70,7 +70,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-north-1
+          aws-region: ${{ secrets.AWS_REGION }}
       - name: Install kubectl
         uses: azure/setup-kubectl@v2.0
         with:
