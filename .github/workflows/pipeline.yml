@@ -31,16 +31,20 @@ jobs:
           docker tag $DOCKER_IMAGE:${{ github.sha }} $DOCKER_IMAGE:latest
       - name: Push Docker image
         run: |
-      - name: Login to Amazon ECR
-        id: login-ecr
+      - name: Login to Amazon ECR Public
+        id: login-ecr-public
         uses: aws-actions/amazon-ecr-login@v2
-
-      - name: Build, tag, and push docker image to Amazon ECR
+        with:
+          registry-type: public
+      - name: Build, tag, and push docker image to Amazon ECR Public
         env:
-          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          REPOSITORY: my-ecr-repo
+          REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+          REGISTRY_ALIAS: my-ecr-public-registry-alias
+          REPOSITORY: my-ecr-public-repo
           IMAGE_TAG: ${{ github.sha }}
         run: |
+         # docker build -t $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG .
+          #docker push $REGISTRY/$REGISTRY_ALIAS/$REPOSITORY:$IMAGE_TAG
            docker build -t my-ecr-repo .
            docker tag my-ecr-repo:latest 961341530125.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repo:latest
            docker push 961341530125.dkr.ecr.eu-north-1.amazonaws.com/my-ecr-repo:latest
